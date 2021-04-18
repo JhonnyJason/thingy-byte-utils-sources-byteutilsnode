@@ -1,5 +1,9 @@
 byteutilsnode = {}
 
+{ StringDecoder } = require("string_decoder")
+decoder = new StringDecoder("utf-8")
+
+
 ############################################################
 byteToHex = (byte) ->
     byte = (byte & 0xFF)
@@ -17,7 +21,7 @@ bufferToBigInt = (byteBuffer) ->
 ############################################################
 bufferToUtf8 = (byteBuffer) ->
     byteArray = new Uint8Array(byteBuffer)
-    return String.fromCharCode.apply(null, byteArray)
+    return decoder.end(byteArray)
 
 utf8ToBufferNode = (utf8) -> Buffer.from(utf8, "utf8")
 
